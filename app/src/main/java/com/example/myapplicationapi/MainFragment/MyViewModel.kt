@@ -1,5 +1,7 @@
 package com.example.myapplicationapi.MainFragment
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +15,7 @@ class MyViewModel: ViewModel() {
     private val _listChanges = MutableLiveData<List<Items>>()
     val listChanges: LiveData<List<Items>> = _listChanges
 
-    fun createFragment(position: Int){
-
+    fun createDetailFragment(position: Int){
     }
 
     private fun init(){

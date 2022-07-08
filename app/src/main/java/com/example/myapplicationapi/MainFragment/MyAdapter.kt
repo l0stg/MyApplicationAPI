@@ -9,23 +9,25 @@ import com.example.myapplicationapi.Items
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.ItemViewBinding
 
-class MyAdapter(private val onItemClicked: ((position: Int)-> Unit)):RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(private val onItemClicked: (Items)-> Unit):RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
      private var myList: List<Items> = listOf()
 
     fun set(newList: List<Items>){
-        myList = newList.toList()
+        this.myList = newList.toList()
         notifyDataSetChanged()
     }
 
-    class MyViewHolder(item: View):RecyclerView.ViewHolder(item) {
-        private val binding = ItemViewBinding.bind(item)
-        fun bind(data: Items) = with(binding) {
+    class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
+        private val binding = ItemViewBinding.bind(view)
+        fun bind(data: Items)
+         = with(binding) {
             tvName.text = tvName.text.toString() + data.name
             tvDescription.text = data.description
             Glide.with(ivPerson.context)
                 .load(data.imageAvatar)
                 .into(ivPerson)
+            itemView.setOnClickListener {}
         }
     }
 
@@ -35,9 +37,10 @@ class MyAdapter(private val onItemClicked: ((position: Int)-> Unit)):RecyclerVie
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(myList[position])
+        val item = myList[position]
+        holder.bind(item)
         holder.itemView.setOnClickListener {
-            onItemClicked(position)
+            onItemClicked(myList[position])
         }
     }
 
