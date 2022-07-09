@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView? = binding?.myRecyclerView
         myAdapter =  MyAdapter {
             Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
+            supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.placeHolder, DetailFragment()).commit()
         }
         recyclerView?.layoutManager = LinearLayoutManager(this@MainActivity)
         recyclerView?.adapter = myAdapter
@@ -33,11 +34,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.listChanges.observe(this){
             myAdapter!!.set(it)
-        }
-        fun routeSecondFragment(model: Items){
-            val intent = Intent(this, DetailFragment::class.java).apply {
-                putExtra(DetailFragment, model)
-            }
         }
     }
 }

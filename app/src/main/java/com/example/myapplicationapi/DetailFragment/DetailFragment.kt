@@ -48,7 +48,7 @@ class DetailFragment() : Fragment() {
 
         private val ARG_POS = "ARG_POS"
 
-        fun newInstance(posit: Int) = DetailFragment()
+        fun <items> newInstance(item: items) = DetailFragment()
     }
 
 
