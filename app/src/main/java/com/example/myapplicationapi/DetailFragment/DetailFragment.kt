@@ -41,6 +41,7 @@ class DetailFragment() : Fragment() {
         with(fragmentDemoBinding!!) {
             Glide.with(imDetailImage.context)
                 .load(itemOn.imageAvatar)
+                .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imDetailImage)
         }
 

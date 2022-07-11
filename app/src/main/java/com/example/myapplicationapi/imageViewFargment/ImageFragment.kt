@@ -34,6 +34,7 @@ class ImageFragment : Fragment() {
         with(fragmentImageBinding!!) {
             Glide.with(imageDetail.context)
                 .load(imagePut)
+                .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imageDetail)
         }
     }

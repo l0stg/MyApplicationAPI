@@ -9,10 +9,10 @@ class MyDataClass {
 }
 
 data class Items(
-    val name: String,
-    val description: String,
+    val name: String? = null,
+    val description: String? = null,
     @SerializedName("image_url")
-    val imageAvatar: String
+    val imageAvatar: String? = null
     ): Serializable
 
 

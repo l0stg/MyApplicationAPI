@@ -2,13 +2,10 @@ package com.example.myapplicationapi.MainFragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.myapplicationapi.Data.Retrofit.Common
 import com.example.myapplicationapi.Data.Retrofit.RetrofitServices
 import com.example.myapplicationapi.Items
@@ -35,6 +32,7 @@ class MyViewModel: ViewModel() {
     init {
         init()
     }
+
     private fun getAllMovieList() {
         mService.getMovieList().enqueue(object : Callback<MutableList<Items>> {
             override fun onFailure(call: Call<MutableList<Items>>, t: Throwable) {
