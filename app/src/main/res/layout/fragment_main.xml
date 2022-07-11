@@ -9,5 +9,8 @@
         android:id="@+id/myRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_view"/>
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        tools:listitem="@layout/item_view" />
+
 </FrameLayout>

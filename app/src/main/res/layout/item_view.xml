@@ -22,14 +22,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivPerson"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameMain"
         app:layout_constraintVertical_bias="0.862" />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvNameMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="30dp"
         android:text="Name: "
@@ -39,7 +38,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivPerson"
+        app:layout_constraintStart_toStartOf="@+id/tvDescription"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

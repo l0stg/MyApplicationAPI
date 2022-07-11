@@ -8,32 +8,29 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
-import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.FragmentMainBinding
-
 class MainFragment : Fragment() {
 
     private var fragmentBlankBinding: FragmentMainBinding? = null
     private val viewModel by viewModels<MyViewModel>()
     private var myAdapter: MyAdapter? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val bindingBlank = FragmentMainBinding.inflate(inflater, container, false)
-        fragmentBlankBinding = bindingBlank
-        bindingBlank.myRecyclerView.layoutManager = LinearLayoutManager(activity)
-        myAdapter = MyAdapter{}
-        bindingBlank.myRecyclerView.adapter = myAdapter
-
-        return bindingBlank.root
+        fragmentBlankBinding = FragmentMainBinding.inflate(inflater, container, false)
+        return fragmentBlankBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        fragmentBlankBinding?.myRecyclerView?.layoutManager = LinearLayoutManager(activity)
+        myAdapter = MyAdapter{
+            viewModel.routeToDetailFragment(it, view)
+        }
+        fragmentBlankBinding?.myRecyclerView?.adapter = myAdapter
         viewModel.listChanges.observe(this.viewLifecycleOwner) {
             myAdapter!!.set(it)
         }

@@ -22,7 +22,8 @@ class MyAdapter(private val onItemClicked: (Items)-> Unit):RecyclerView.Adapter<
         private val binding = ItemViewBinding.bind(view)
         fun bind(data: Items)
          = with(binding) {
-            tvName.text = tvName.text.toString() + data.name
+            val nameBeer: String = "name: "
+            tvNameMain.text = nameBeer + data.name
             tvDescription.text = data.description
             Glide.with(ivPerson.context)
                 .load(data.imageAvatar)
