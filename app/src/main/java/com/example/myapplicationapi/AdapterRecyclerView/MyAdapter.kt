@@ -1,4 +1,4 @@
-package com.example.myapplicationapi.MainFragment
+package com.example.myapplicationapi.AdapterRecyclerView
 
 import android.view.LayoutInflater
 import android.view.View

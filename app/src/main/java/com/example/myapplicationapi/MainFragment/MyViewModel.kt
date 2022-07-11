@@ -15,9 +15,6 @@ class MyViewModel: ViewModel() {
     private val _listChanges = MutableLiveData<List<Items>>()
     val listChanges: LiveData<List<Items>> = _listChanges
 
-    fun createDetailFragment(position: Int){
-    }
-
     private fun init(){
         myData.adder()
         _listChanges.value = myData.firstList

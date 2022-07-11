@@ -26,7 +26,6 @@ class DetailFragment() : Fragment() {
     ): View? {
         val binding = FragmentDetailBinding.inflate(inflater, container, false)
         fragmentDemoBinding = binding
-
         return binding.root
     }
 
@@ -42,13 +41,6 @@ class DetailFragment() : Fragment() {
                 .load(myData!!.firstList[1].imageAvatar)
                 .into(imDetailImage)
         }
-    }
-
-    companion object {
-
-        private val ARG_POS = "ARG_POS"
-
-        fun <items> newInstance(item: items) = DetailFragment()
     }
 
 
