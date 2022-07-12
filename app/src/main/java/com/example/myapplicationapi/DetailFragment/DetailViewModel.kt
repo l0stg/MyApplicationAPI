@@ -9,10 +9,6 @@ import com.example.myapplicationapi.R
 
 class DetailViewModel: ViewModel() {
 
-    fun routeToDetailImage(item: Items, view: View) {
-        val bundle = Bundle()
-        bundle.putString("Image", item.imageAvatar)
-        view.findNavController().navigate(R.id.action_detailFragment_to_imageFragment, bundle)
-    }
+
 
 }

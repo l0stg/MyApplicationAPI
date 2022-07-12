@@ -14,21 +14,22 @@ import com.bumptech.glide.Glide
 import com.example.myapplicationapi.Items
 import com.example.myapplicationapi.MyDataClass
 import com.example.myapplicationapi.R
+import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentDetailBinding
 
 class DetailFragment() : Fragment() {
 
     private val viewModel by viewModels<DetailViewModel>()
-    private var fragmentDemoBinding: FragmentDetailBinding? = null
+    private var binding: FragmentDetailBinding? = null
+    private val screens: Screens = Screens()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentDetailBinding.inflate(inflater, container, false)
-        fragmentDemoBinding = binding
-        return binding.root
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,17 +37,17 @@ class DetailFragment() : Fragment() {
 
         val itemOn = arguments?.getSerializable("Item") as Items
 
-        fragmentDemoBinding?.tvNameDetail?.text = itemOn.name
-        fragmentDemoBinding?.tvDescriptionDetail?.text = itemOn.description
-        with(fragmentDemoBinding!!) {
+        binding?.tvNameDetail?.text = itemOn.name
+        binding?.tvDescriptionDetail?.text = itemOn.description
+        with(binding!!) {
             Glide.with(imDetailImage.context)
                 .load(itemOn.imageAvatar)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imDetailImage)
         }
 
-        fragmentDemoBinding?.imDetailImage?.setOnClickListener{
-           viewModel.routeToDetailImage(itemOn, view)
+        binding?.imDetailImage?.setOnClickListener{
+           screens.routeToDetailImage(itemOn, view)
         }
 
     }

@@ -13,27 +13,24 @@ import com.example.myapplicationapi.databinding.FragmentImageBinding
 
 class ImageFragment : Fragment() {
 
-    private var fragmentImageBinding: FragmentImageBinding? = null
+    private var binding: FragmentImageBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentImageBinding.inflate(inflater, container, false)
-        fragmentImageBinding = binding
-        return binding.root
+        binding = FragmentImageBinding.inflate(inflater, container, false)
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imagePut = arguments?.getString("Image")//вынести во вью модел
+        val imagePut = arguments?.getSerializable("Item") as Items //вынести во вью модел
 
-        println(imagePut)
-
-        with(fragmentImageBinding!!) {
+        with(binding!!) {
             Glide.with(imageDetail.context)
-                .load(imagePut)
+                .load(imagePut.imageAvatar)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imageDetail)
         }
