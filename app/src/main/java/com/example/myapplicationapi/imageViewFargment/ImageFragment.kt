@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.example.data.models.SomethingDB
 import com.example.myapplicationapi.DataModel.Items
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.FragmentDetailBinding
@@ -26,7 +27,7 @@ class ImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imagePut = arguments?.getSerializable("Item") as Items //вынести во вью модел
+        val imagePut = arguments?.getSerializable("Item") as SomethingDB //вынести во вью модел
 
         with(binding!!) {
             Glide.with(imageDetail.context)
