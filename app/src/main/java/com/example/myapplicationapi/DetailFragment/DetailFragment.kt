@@ -19,7 +19,6 @@ import com.example.myapplicationapi.databinding.FragmentDetailBinding
 
 class DetailFragment() : Fragment() {
 
-    private val viewModel by viewModels<DetailViewModel>()
     private var binding: FragmentDetailBinding? = null
     private val screens: Screens = Screens()
 
