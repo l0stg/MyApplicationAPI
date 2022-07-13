@@ -12,11 +12,11 @@ interface ISomethingDao {
     fun getAllSomethingData(): LiveData<List<SomethingDB>>
 
     @Insert
-    suspend fun addSomething(model: SomethingDB)
+     suspend fun addSomething(model: SomethingDB)
 
     @Delete
-    suspend fun deleteSomething(model: SomethingDB)
+     suspend fun deleteSomething(model: SomethingDB)
 
     @Update
-    suspend fun updateSomething(model: SomethingDB)
+     suspend fun updateSomething(model: SomethingDB)
 }
