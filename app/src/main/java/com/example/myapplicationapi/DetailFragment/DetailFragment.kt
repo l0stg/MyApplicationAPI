@@ -7,12 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.myapplicationapi.Items
-import com.example.myapplicationapi.MyDataClass
+import com.example.data.models.SomethingDB
+import com.example.myapplicationapi.DataModel.Items
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentDetailBinding
@@ -34,7 +31,7 @@ class DetailFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemOn = arguments?.getSerializable("Item") as Items
+        val itemOn = arguments?.getSerializable("Item") as SomethingDB
 
         binding?.tvNameDetail?.text = itemOn.name
         binding?.tvDescriptionDetail?.text = itemOn.description

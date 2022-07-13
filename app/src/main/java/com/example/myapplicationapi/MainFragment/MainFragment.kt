@@ -28,37 +28,41 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init(view)
+        setUpViewModel()
 
-        binding?.myRecyclerView?.layoutManager = LinearLayoutManager(activity)
+        /*viewModel.listChanges.observe(this.viewLifecycleOwner) {
+            myAdapter!!.set(it)
+        }*/
 
+        binding!!.addButton.setOnClickListener {
+            viewModel.addStaticSomethingModel()
+        }
+
+        binding!!.deleteButton.setOnClickListener {
+            val item = myAdapter!!.myList.last()
+            viewModel.deleteSomethingModel(item)
+        }
+        binding!!.updateButt.setOnClickListener {
+            val item = myAdapter!!.myList.last()
+            viewModel.updateSomethingModel(item)
+        }
+    }
+
+    private fun setUpViewModel(){
+        viewModel.observeAllSomething().observe(viewLifecycleOwner) {
+            myAdapter?.set(it)
+        }
+
+    }
+
+    private fun init(view: View){
         myAdapter = MyAdapter{
             screens.routeToDetailFragment(it, view)
         }
-
-        binding?.myRecyclerView?.adapter = myAdapter
-
-        binding!!.buttonSort.setOnClickListener {
-            viewModel.sortByName()
-        }
-
-        //поиск по имени
-
-        binding!!.searchViewMain.clearFocus()
-        binding!!.searchViewMain.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-               // viewModel.filterList(p0)
-                return true
-            }
-        })
-
-
-
-        viewModel.listChanges.observe(this.viewLifecycleOwner) {
-            myAdapter!!.set(it)
+        binding?.apply {
+            myRecyclerView.layoutManager = LinearLayoutManager(activity)
+            myRecyclerView.adapter = myAdapter
         }
     }
 }

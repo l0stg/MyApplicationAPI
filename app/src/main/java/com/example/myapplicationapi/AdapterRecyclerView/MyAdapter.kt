@@ -5,22 +5,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplicationapi.Items
+import com.example.data.models.SomethingDB
+import com.example.myapplicationapi.DataModel.Items
+
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.ItemViewBinding
 
-class MyAdapter(private val onItemClicked: (Items)-> Unit):RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(private val onItemClicked: (SomethingDB)-> Unit):RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-     private var myList: List<Items> = listOf()
+     var myList: List<SomethingDB> = listOf()
 
-    fun set(newList: List<Items>){
+    fun set(newList: List<SomethingDB>){
         this.myList = newList.toList()
         notifyDataSetChanged()
     }
 
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
         private val binding = ItemViewBinding.bind(view)
-        fun bind(data: Items)
+        fun bind(data: SomethingDB)
          = with(binding) {
             val nameBeer: String = "name: "
             tvNameMain.text = nameBeer + data.name

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.example.myapplicationapi.Items
+import com.example.myapplicationapi.DataModel.Items
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.FragmentDetailBinding
 import com.example.myapplicationapi.databinding.FragmentImageBinding
