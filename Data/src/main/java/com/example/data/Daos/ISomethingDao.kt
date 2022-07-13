@@ -14,6 +14,9 @@ interface ISomethingDao {
     @Insert
      suspend fun addSomething(model: SomethingDB)
 
+     @Insert
+     suspend fun addAllData(newData: List<SomethingDB>)
+
     @Delete
      suspend fun deleteSomething(model: SomethingDB)
 

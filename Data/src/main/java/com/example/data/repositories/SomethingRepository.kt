@@ -12,6 +12,8 @@ class SomethingRepository {
 
     fun getAllSomethingData() = somethingDao.getAllSomethingData()
 
+    suspend fun addAllData(newList: List<SomethingDB>) = somethingDao.addAllData(newList)
+
     suspend fun addSomething(model: SomethingDB) = somethingDao.addSomething(model)
 
     suspend fun deleteSomething(model: SomethingDB) = somethingDao.deleteSomething(model)

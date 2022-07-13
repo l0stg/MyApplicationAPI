@@ -23,6 +23,7 @@ class MyViewModel: ViewModel() {
     private var mService: RetrofitServices = Common.retrofitService
 
     fun observeAllSomething() = SomethingRepository.instance.getAllSomethingData()
+
     fun addStaticSomethingModel() {
         viewModelScope.launch {
             val model = SomethingDB(
@@ -31,6 +32,19 @@ class MyViewModel: ViewModel() {
                 imageAvatar = "https://images.punkapi.com/v2/2.png"
             )
             SomethingRepository.instance.addSomething(model)
+        }
+    }
+
+    fun setDataInDataBase(newList: List<SomethingDB>){
+        viewModelScope.launch {
+            for (it in newList) {
+                val model = SomethingDB(
+                    name = it.name,
+                    description = it.description,
+                    imageAvatar = it.imageAvatar
+                )
+                SomethingRepository.instance.addSomething(model)
+            }
         }
     }
 
@@ -47,21 +61,24 @@ class MyViewModel: ViewModel() {
         }
     }
 
-    /*private fun init(){
-       //getAllMovieList()
+    private fun init(){
+      getAllMovieList()
     }
     init {
         init()
         }
-*/
 
-    /*private fun getAllMovieList() {
-        mService.getMovieList().enqueue(object : Callback<MutableList<Items>> {
-            override fun onFailure(call: Call<MutableList<Items>>, t: Throwable) {
+
+    private fun getAllMovieList() {
+        mService.getMovieList().enqueue(object : Callback<List<SomethingDB>> {
+            override fun onFailure(call: Call<List<SomethingDB>>, t: Throwable) {
             }
-            override fun onResponse(call: Call<MutableList<Items>>, response: Response<MutableList<Items>>) {
-                _listChanges.value = (response.body() as MutableList<Items>)
+            override fun onResponse(call: Call<List<SomethingDB>>, response: Response<List<SomethingDB>>) {
+                viewModelScope.launch {
+                    println(response.body() as List<SomethingDB>)
+                    setDataInDataBase(response.body() as List<SomethingDB>)
+                }
             }
         })
-    }*/
+    }
 }
