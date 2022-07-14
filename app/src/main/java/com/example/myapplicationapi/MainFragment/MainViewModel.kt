@@ -43,14 +43,16 @@ class MyViewModel: ViewModel() {
     }
     fun observeSortByName(): LiveData<List<DataBaseModel>> = SomethingRepository.instance.sortByName().asLiveData()
 
-    fun updateData(model: DataBaseModel){
+/*    fun updateData(model: DataBaseModel){
+        val newModel: DataBaseModel
+        newModel = DataBaseModel(model.uuid, model.name, model.description, model.imageAvatar)
 
     }
     fun compareDataNewResponse(newData: List<DataBaseModel>){
-
         newData.forEach {
 
+            updateData(it)
         }
 
-    }
+    }*/
 }
