@@ -1,22 +1,23 @@
 package com.example.data
 
 import android.content.Context
+
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.data.Daos.ISomethingDao
-import com.example.data.models.SomethingDB
+import com.example.data.Daos.Dao
+import com.example.data.models.DataBaseModel
 
 
-@Database(entities = [SomethingDB::class], version = 1)
-abstract class DBProvider: RoomDatabase() {
+@Database(entities = [DataBaseModel::class], version = 1)
+abstract class Provider: RoomDatabase() {
 
     companion object {
-        lateinit var instance: DBProvider
+        lateinit var instance: Provider
         fun create(context: Context) {
-            instance = Room.databaseBuilder(context, DBProvider::class.java, "database").build()
+            instance = Room.databaseBuilder(context, Provider::class.java, "my_table").build()
         }
     }
 
-    abstract fun somethingDao(): ISomethingDao
+    abstract fun somethingDao(): Dao
 }

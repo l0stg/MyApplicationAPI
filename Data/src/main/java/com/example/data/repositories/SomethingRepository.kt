@@ -1,28 +1,37 @@
 package com.example.data.repositories
 
-import com.example.data.DBProvider
-import com.example.data.models.SomethingDB
+
+import com.example.data.Provider
+import com.example.data.models.DataBaseModel
+import kotlinx.coroutines.flow.Flow
+
 
 class SomethingRepository {
-    private val somethingDao = DBProvider.instance.somethingDao()
+    private val myDao = Provider.instance.somethingDao()
 
     companion object{
         val instance = SomethingRepository()
     }
 
-    fun getAllSomethingData() = somethingDao.getAllSomethingData()
-
-    fun sortByName() = somethingDao.getSortByName()
-
-    fun searchDataBase(searchQuery: String): kotlinx.coroutines.flow.Flow<List<SomethingDB>> {
-        return somethingDao.searchDatabase(searchQuery)
+    fun getAllSomethingData(): Flow<List<DataBaseModel>> {
+        return myDao.getAllSomethingData()
     }
 
-    suspend fun addAllData(newList: List<SomethingDB>) {
-        somethingDao.addAllData(newList)
+    fun sortByName(): Flow<List<DataBaseModel>> = myDao.getSortByName()
+
+    fun searchDataBase(searchQuery: String): Flow<List<DataBaseModel>> {
+        return myDao.searchDatabase(searchQuery)
     }
 
-    suspend fun deleteAllTable() = somethingDao.nukeTable()
+    suspend fun addAllData(newList: List<DataBaseModel>) {
+        myDao.addAllData(newList)
+    }
+
+    suspend fun deleteAllTable() = myDao.nukeTable()
+
+    suspend fun updateData(model: DataBaseModel) = myDao.updateData(model)
+
+
 
 
 }

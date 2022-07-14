@@ -1,15 +1,12 @@
 package com.example.myapplicationapi.DetailFragment
 
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.example.data.models.SomethingDB
-import com.example.myapplicationapi.DataModel.Items
+import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentDetailBinding
@@ -31,7 +28,7 @@ class DetailFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemOn = arguments?.getSerializable("Item") as SomethingDB
+        val itemOn = arguments?.getSerializable("Item") as DataBaseModel
 
         binding?.tvNameDetail?.text = itemOn.name
         binding?.tvDescriptionDetail?.text = itemOn.description
