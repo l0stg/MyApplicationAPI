@@ -8,5 +8,5 @@ import retrofit2.http.*
 
 interface RetrofitServices {
     @GET("beers")
-    fun getMovieList(): Call<List<SomethingDB>>
+    fun getMovieList(): Call<List<Items>>
 }

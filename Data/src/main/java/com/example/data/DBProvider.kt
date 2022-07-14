@@ -13,7 +13,6 @@ abstract class DBProvider: RoomDatabase() {
 
     companion object {
         lateinit var instance: DBProvider
-
         fun create(context: Context) {
             instance = Room.databaseBuilder(context, DBProvider::class.java, "database").build()
         }

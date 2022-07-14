@@ -13,5 +13,4 @@ data class SomethingDB(
     @ColumnInfo(name = "sm_title") var name: String,
     @ColumnInfo(name = "sm_subtitle") var description: String,
     @ColumnInfo(name = "image") @SerializedName("image_url") var imageAvatar: String,
-
     ): Serializable

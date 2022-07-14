@@ -12,11 +12,17 @@ class SomethingRepository {
 
     fun getAllSomethingData() = somethingDao.getAllSomethingData()
 
-    suspend fun addAllData(newList: List<SomethingDB>) = somethingDao.addAllData(newList)
+    fun sortByName() = somethingDao.getSortByName()
 
-    suspend fun addSomething(model: SomethingDB) = somethingDao.addSomething(model)
+    fun searchDataBase(searchQuery: String): kotlinx.coroutines.flow.Flow<List<SomethingDB>> {
+        return somethingDao.searchDatabase(searchQuery)
+    }
 
-    suspend fun deleteSomething(model: SomethingDB) = somethingDao.deleteSomething(model)
+    suspend fun addAllData(newList: List<SomethingDB>) {
+        somethingDao.addAllData(newList)
+    }
 
-    suspend fun updateSomething(model: SomethingDB) = somethingDao.updateSomething(model)
+    suspend fun deleteAllTable() = somethingDao.nukeTable()
+
+
 }
