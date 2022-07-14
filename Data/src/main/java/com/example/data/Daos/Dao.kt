@@ -26,15 +26,4 @@ interface Dao {
 
     @Query("SELECT * FROM my_table WHERE title LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): Flow<List<DataBaseModel>>
-
-/*
-
-    @Query("SELECT * FROM my_table WHERE title NOT LIKE :name OR subtitle NOT LIKE :description OR image NOT LIKE :imageAV")
-    fun compareData(name: String, description: String, imageAV: String): DataBaseModel
-
-    @Update
-    suspend fun updateData(model: DataBaseModel)
-*/
-
-
 }

@@ -29,11 +29,4 @@ class SomethingRepository {
 
 
     suspend fun deleteAllTable() = myDao.nukeTable()
-/*
-    suspend fun updateData(model: DataBaseModel) = myDao.updateData(model)
-
-
-*/
-
-
 }

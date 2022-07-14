@@ -22,8 +22,7 @@ class MyAdapter(private val onItemClicked: (DataBaseModel)-> Unit):RecyclerView.
         private val binding = ItemViewBinding.bind(view)
         fun bind(data: DataBaseModel)
          = with(binding) {
-            val nameBeer: String = "name: "
-            tvNameMain.text = nameBeer + data.name
+            tvNameMain.text = data.name
             tvDescription.text = data.description
             Glide.with(ivPerson.context)
                 .load(data.imageAvatar)
