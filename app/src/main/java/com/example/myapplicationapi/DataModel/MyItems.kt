@@ -4,9 +4,12 @@ package com.example.myapplicationapi.DataModel
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+var intResponse: Int = 1
+
 data class Items(
-    var name: String? = null,
-    var description: String? = null,
+    val id: Int? = null,
+    val name: String? = null,
+    val description: String? = null,
     @SerializedName("image_url")
-    var imageAvatar: String? = null
+    val imageAvatar: String? = null
 ): Serializable

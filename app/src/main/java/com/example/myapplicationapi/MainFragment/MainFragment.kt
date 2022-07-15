@@ -7,12 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentMainBinding
+
+var isLoading = false
+
 class MainFragment : Fragment(), SearchView.OnQueryTextListener {
+
 
     private var binding: FragmentMainBinding? = null
     private val viewModel by viewModels<MyViewModel>()
@@ -31,13 +37,37 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         init(view)
         setUpViewModel()
+         var pageNum = 1
 
         binding?.buttonSort?.setOnClickListener {
             buttonSortName()
         }
 
+
         binding?.searchViewMain?.setOnQueryTextListener(this@MainFragment)
+
+
+        binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layout = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItemCount = layout.childCount
+                val firstVisibleItemPosition = layout.findFirstCompletelyVisibleItemPosition()
+                val total = myAdapter!!.itemCount
+                if (!isLoading) {
+                    if (visibleItemCount + firstVisibleItemPosition >= total && firstVisibleItemPosition >= 0) {
+                        pageNum++
+                        isLoading = true
+                        viewModel.getAllItemList(pageNum)
+                    }
+                }
+
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
     }
+
+
+
 
     private fun setUpViewModel(){
         viewModel.observeAllSomething().observe(viewLifecycleOwner) {

@@ -13,9 +13,11 @@ import com.example.data.models.DataBaseModel
 abstract class Provider: RoomDatabase() {
 
     companion object {
-        lateinit var instance: Provider
+        var instance: Provider? = null
         fun create(context: Context) {
-            instance = Room.databaseBuilder(context, Provider::class.java, "my_table").build()
+            if (instance == null)
+                instance = Room.databaseBuilder(context, Provider::class.java, "my_table").build()
+            else instance
         }
     }
 

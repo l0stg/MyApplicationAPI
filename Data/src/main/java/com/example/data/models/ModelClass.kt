@@ -9,8 +9,8 @@ import java.util.*
 
 @Entity(tableName = "my_table")
 data class DataBaseModel(
-    @PrimaryKey var uuid: String = UUID.randomUUID().toString(),
-    @ColumnInfo(name = "title") var name: String,
-    @ColumnInfo(name = "subtitle") var description: String,
-    @ColumnInfo(name = "image") var imageAvatar: String,
+    @PrimaryKey val id: Int? = null,
+    @ColumnInfo(name = "title") val name: String,
+    @ColumnInfo(name = "subtitle") val description: String,
+    @ColumnInfo(name = "image") val imageAvatar: String,
     ): Serializable

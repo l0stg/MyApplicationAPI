@@ -7,5 +7,8 @@ import retrofit2.http.*
 
 interface RetrofitServices {
     @GET("beers")
-    fun getMovieList(): Call<List<Items>>
+
+    fun getItemList(
+        @Query("page") page: Int
+    ): Call<List<Items>>
 }
