@@ -67,8 +67,6 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
-
-
     }
 
     private fun setUpViewModel(){
