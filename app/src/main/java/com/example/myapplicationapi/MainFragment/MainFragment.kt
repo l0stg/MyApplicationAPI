@@ -56,12 +56,14 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
                 val visibleItemCount = layoutManager.childCount
                 val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
                 val total = myAdapter!!.itemCount
-                if (!isLoading) {
-                    if ((visibleItemCount + pastVisibleItem) >= total) {
-                        isLoading = true
-                        viewModel.getAllItemList(viewModel.integer.value!!)
+                if (viewModel.integer.value!! < 10) {
+                    if (!isLoading) {
+                        if ((visibleItemCount + pastVisibleItem) >= total) {
+                            isLoading = true
+                            viewModel.getAllItemList(viewModel.integer.value!!)
+                        }
                     }
-                }
+                }else Toast.makeText(activity, "Последняя страница", Toast.LENGTH_SHORT).show()
                 super.onScrolled(recyclerView, dx, dy)
             }
         })

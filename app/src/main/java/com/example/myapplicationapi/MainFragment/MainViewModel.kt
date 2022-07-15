@@ -43,11 +43,8 @@ class MyViewModel: ViewModel() {
                     SomethingRepository.instance.addAllData(listData)
                     integer.postValue(integer.value!! + 1)
                 }
-                println(response.body())
-
             }
         })
-
     }
 
     fun observeSortByName(): LiveData<List<DataBaseModel>> = SomethingRepository.instance.sortByName().asLiveData()

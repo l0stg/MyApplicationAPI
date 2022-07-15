@@ -26,7 +26,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSort"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_view">
+        tools:listitem="@layout/item_view"
+        android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
 
