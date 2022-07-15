@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.Glide
 import com.example.data.models.DataBaseModel
@@ -46,6 +47,7 @@ class ImageFragment : Fragment() {
 
         binding!!.saveOnDeviceButton.setOnClickListener {
             downloadImageFromPath(imagePut.name)
+            Toast.makeText(activity, "Изображение сохранено", Toast.LENGTH_SHORT).show()
         }
     }
 

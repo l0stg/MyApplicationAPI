@@ -38,7 +38,6 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         init(view)
         setUpViewModel()
         var isLoading = false
-        var pageNum = 1
 
         binding?.buttonSort?.setOnClickListener {
             buttonSortName()
@@ -60,8 +59,7 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
                 if (!isLoading) {
                     if ((visibleItemCount + pastVisibleItem) >= total) {
                         isLoading = true
-                        pageNum++
-                        viewModel.getAllItemList(pageNum)
+                        viewModel.getAllItemList(viewModel.integer.value!!)
                     }
                 }
                 super.onScrolled(recyclerView, dx, dy)

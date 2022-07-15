@@ -22,7 +22,7 @@ class MyViewModel: ViewModel() {
 
     private var mService: RetrofitServices = Common.retrofitService
     init {
-        getAllItemList(1)
+            getAllItemList(1)
     }
 
     fun observeAllSomething(): LiveData<List<DataBaseModel>> =
@@ -34,7 +34,6 @@ class MyViewModel: ViewModel() {
     fun getAllItemList(page: Int) {
         mService.getItemList(page).enqueue(object : Callback<List<Items>> {
             override fun onFailure(call: Call<List<Items>>, t: Throwable) {
-                Log.e("Response", "Проблемы с интернет соеденением")
             }
             override fun onResponse(call: Call<List<Items>>, response: Response<List<Items>>) {
                 viewModelScope.launch {
@@ -42,7 +41,7 @@ class MyViewModel: ViewModel() {
                         .map{ DataBaseModel(it.id,
                             it.name!!, it.description!!, it.imageAvatar!!) }
                     SomethingRepository.instance.addAllData(listData)
-                    integer.postValue(page) 
+                    integer.postValue(integer.value!! + 1)
                 }
                 println(response.body())
 
