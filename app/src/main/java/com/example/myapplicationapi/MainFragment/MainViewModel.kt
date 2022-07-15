@@ -18,8 +18,9 @@ import java.util.*
 
 class MyViewModel: ViewModel() {
 
-    private var mService: RetrofitServices = Common.retrofitService
+    val integer: MutableLiveData<Int> = MutableLiveData(1)
 
+    private var mService: RetrofitServices = Common.retrofitService
     init {
         getAllItemList(1)
     }
@@ -41,11 +42,13 @@ class MyViewModel: ViewModel() {
                         .map{ DataBaseModel(it.id,
                             it.name!!, it.description!!, it.imageAvatar!!) }
                     SomethingRepository.instance.addAllData(listData)
+                    integer.postValue(page) 
                 }
-                isLoading = false
                 println(response.body())
+
             }
         })
+
     }
 
     fun observeSortByName(): LiveData<List<DataBaseModel>> = SomethingRepository.instance.sortByName().asLiveData()

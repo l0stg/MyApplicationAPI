@@ -15,7 +15,7 @@ import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentMainBinding
 
-var isLoading = false
+
 
 class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -37,37 +37,39 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
         init(view)
         setUpViewModel()
-         var pageNum = 1
+        var isLoading = false
+        var pageNum = 1
 
         binding?.buttonSort?.setOnClickListener {
             buttonSortName()
         }
 
-
         binding?.searchViewMain?.setOnQueryTextListener(this@MainFragment)
 
 
+        viewModel.integer.observe(viewLifecycleOwner){
+            isLoading = false
+        }
+
         binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val layout = recyclerView.layoutManager as LinearLayoutManager
-                val visibleItemCount = layout.childCount
-                val firstVisibleItemPosition = layout.findFirstCompletelyVisibleItemPosition()
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItemCount = layoutManager.childCount
+                val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
                 val total = myAdapter!!.itemCount
                 if (!isLoading) {
-                    if (visibleItemCount + firstVisibleItemPosition >= total && firstVisibleItemPosition >= 0) {
-                        pageNum++
+                    if ((visibleItemCount + pastVisibleItem) >= total) {
                         isLoading = true
+                        pageNum++
                         viewModel.getAllItemList(pageNum)
                     }
                 }
-
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
+
+
     }
-
-
-
 
     private fun setUpViewModel(){
         viewModel.observeAllSomething().observe(viewLifecycleOwner) {
