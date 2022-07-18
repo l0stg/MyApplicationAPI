@@ -25,6 +25,7 @@ class ImageFragment : Fragment() {
 
     private var binding: FragmentImageBinding? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,17 +37,17 @@ class ImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imagePut = arguments?.getSerializable("Item") as DataBaseModel //вынести во вью модел
+        val imagePut = arguments?.getSerializable("Item") as String //вынести во вью модел
 
         with(binding!!) {
             Glide.with(imageDetail.context)
-                .load(imagePut.imageAvatar)
+                .load(imagePut)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imageDetail)
         }
 
         binding!!.saveOnDeviceButton.setOnClickListener {
-            downloadImageFromPath(imagePut.name)
+            downloadImageFromPath(imagePut)
             Toast.makeText(activity, "Изображение сохранено", Toast.LENGTH_SHORT).show()
         }
     }

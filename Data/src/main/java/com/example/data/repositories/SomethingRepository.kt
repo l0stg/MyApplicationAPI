@@ -7,26 +7,24 @@ import kotlinx.coroutines.flow.Flow
 
 
 class SomethingRepository {
-    private val myDao = Provider.instance.somethingDao()
+    private val myDao = Provider.instance?.somethingDao()
 
     companion object{
         val instance = SomethingRepository()
     }
 
     fun getAllSomethingData(): Flow<List<DataBaseModel>> {
-        return myDao.getAllSomethingData()
+        return myDao!!.getAllSomethingData()
     }
 
-    fun sortByName(): Flow<List<DataBaseModel>> = myDao.getSortByName()
+    fun sortByName(ask: Int): Flow<List<DataBaseModel>> = myDao!!.getSortByName(ask)
 
     fun searchDataBase(searchQuery: String): Flow<List<DataBaseModel>> {
-        return myDao.searchDatabase(searchQuery)
+        return myDao!!.searchDatabase(searchQuery)
     }
 
     suspend fun addAllData(newList: List<DataBaseModel>) {
-        myDao.addAllData(newList)
+        myDao!!.addAllData(newList)
     }
 
-
-    suspend fun deleteAllTable() = myDao.nukeTable()
 }

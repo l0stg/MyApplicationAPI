@@ -1,7 +1,6 @@
 package com.example.myapplicationapi.MainFragment
 
 import android.os.Bundle
-import android.view.InputQueue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -50,7 +49,7 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
             isLoading = false
         }
 
-        binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){ // вынести логику пагинации во вью модел
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val visibleItemCount = layoutManager.childCount
@@ -76,19 +75,17 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun init(view: View){
-        myAdapter = MyAdapter{
-            screens.routeToDetailFragment(it, view)
-        }
+       myAdapter = MyAdapter{
+           screens.routeToDetailFragment(it, view)
+       }
         binding?.apply {
             myRecyclerView.layoutManager = LinearLayoutManager(activity)
             myRecyclerView.adapter = myAdapter
         }
     }
-  //поиск по имени
     private fun searchDatabase(query: String){
         val searchQuery = "%$query%"
         viewModel.searchDatabase(searchQuery).observe(viewLifecycleOwner){
-            it.map { FragmentDataModel(it.name, it.description, it.imageAvatar) }
             myAdapter!!.set(it)
         }
     }
@@ -102,7 +99,6 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         return true
     }
 
-    //Сортировка по именни
     private fun buttonSortName(){
         viewModel.observeSortByName().observe(viewLifecycleOwner){
             myAdapter?.set(it)

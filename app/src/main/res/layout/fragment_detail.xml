@@ -6,34 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".DetailFragment.DetailFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="271dp"
-        android:layout_height="306dp"
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/myViewPager"
+        android:layout_width="410dp"
+        android:layout_height="392dp"
         app:layout_constraintBottom_toTopOf="@+id/tvNameDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imDetailImage"
-            android:layout_width="195dp"
-            android:layout_height="258dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            tools:src="@tools:sample/avatars" />
-    </androidx.cardview.widget.CardView>
+
+
 
     <TextView
         android:id="@+id/tvDescriptionDetail"
         android:layout_width="342dp"
         android:layout_height="148dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="92dp"
         android:text="DescriptionBeer"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -49,4 +45,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

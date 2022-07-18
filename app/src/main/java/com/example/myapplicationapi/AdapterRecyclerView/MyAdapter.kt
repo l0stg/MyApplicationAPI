@@ -28,7 +28,6 @@ class MyAdapter(private val onItemClicked: (DataBaseModel)-> Unit):RecyclerView.
                 .load(data.imageAvatar)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(ivPerson)
-            itemView.setOnClickListener {}
         }
     }
 

@@ -12,5 +12,5 @@ data class DataBaseModel(
     @PrimaryKey val id: Int? = null,
     @ColumnInfo(name = "title") val name: String,
     @ColumnInfo(name = "subtitle") val description: String,
-    @ColumnInfo(name = "image") val imageAvatar: String,
+    @ColumnInfo(name = "image") @SerializedName("image_url") val imageAvatar: String? = null,
     ): Serializable

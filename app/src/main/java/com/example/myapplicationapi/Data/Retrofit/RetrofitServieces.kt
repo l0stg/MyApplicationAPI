@@ -1,6 +1,6 @@
 package com.example.myapplicationapi.Data.Retrofit
 
-import com.example.myapplicationapi.DataModel.Items
+import com.example.data.models.DataBaseModel
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -10,5 +10,5 @@ interface RetrofitServices {
 
     fun getItemList(
         @Query("page") page: Int
-    ): Call<List<Items>>
+    ): Call<List<DataBaseModel>>
 }

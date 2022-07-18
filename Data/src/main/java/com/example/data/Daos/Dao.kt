@@ -13,8 +13,10 @@ interface Dao {
     @Query("SELECT * FROM my_table")
     fun getAllSomethingData(): Flow<List<DataBaseModel>>
 
-    @Query("SELECT * from my_table ORDER BY title DESC")
-    fun getSortByName(): Flow<List<DataBaseModel>>
+    @Query("SELECT * FROM my_table ORDER BY " +
+            "CASE WHEN :isAsc = 1  THEN title END ASC, " +
+            "CASE WHEN :isAsc = 0 THEN title END DESC ")
+    fun getSortByName(isAsc: Int): Flow<List<DataBaseModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllData(newData: List<DataBaseModel>)
