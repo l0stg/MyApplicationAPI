@@ -4,30 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C6B8B8"
     tools:context=".DetailFragment.DetailFragment">
 
-    <ImageView
-        android:id="@+id/imDetailImage"
-        android:layout_width="195dp"
-        android:layout_height="258dp"
-        android:layout_marginTop="24dp"
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/myViewPager"
+        android:layout_width="403dp"
+        android:layout_height="352dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
     <TextView
         android:id="@+id/tvDescriptionDetail"
         android:layout_width="342dp"
         android:layout_height="148dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="92dp"
         android:text="DescriptionBeer"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -35,13 +37,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NameBeer"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/tvDescriptionDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/sizeItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="1"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameDetail"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imDetailImage"
-        app:layout_constraintVertical_bias="0.423" />
+        app:layout_constraintTop_toBottomOf="@+id/myViewPager" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
