@@ -21,6 +21,7 @@
             android:layout_height="258dp"
             android:layout_gravity="center"
             tools:src="@tools:sample/avatars" />
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

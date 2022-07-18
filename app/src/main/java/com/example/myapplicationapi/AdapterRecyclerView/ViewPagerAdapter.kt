@@ -26,6 +26,7 @@ class ViewPagerAdapter(private val onItemClicked: (String)-> Unit): RecyclerView
                 .load(data)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imDetailImage)
+
             }
         }
     }
@@ -42,6 +43,7 @@ class ViewPagerAdapter(private val onItemClicked: (String)-> Unit): RecyclerView
             onItemClicked(myList[position])
         }
     }
+
     override fun getItemCount(): Int = myList.size
 
 

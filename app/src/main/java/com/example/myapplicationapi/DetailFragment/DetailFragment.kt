@@ -56,7 +56,7 @@ class DetailFragment() : Fragment() {
         viewPager = binding!!.myViewPager
         viewPagerAdapter!!.set(imageList!!)
         viewPager!!.adapter = viewPagerAdapter
-
+        binding!!.sizeItem.text = viewPagerAdapter!!.itemCount.toString()
         binding?.tvNameDetail?.text = itemOn.name
         binding?.tvDescriptionDetail?.text = itemOn.description
 

@@ -9,8 +9,8 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/myViewPager"
-        android:layout_width="410dp"
-        android:layout_height="392dp"
+        android:layout_width="403dp"
+        android:layout_height="352dp"
         app:layout_constraintBottom_toTopOf="@+id/tvNameDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,5 +46,17 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/sizeItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="1"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameDetail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myViewPager" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
