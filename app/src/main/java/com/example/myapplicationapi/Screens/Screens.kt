@@ -13,7 +13,7 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
     private val cicerone = Cicerone.create()
-    val router get() = cicerone.router
+    private val router get() = cicerone.router
     val navigatorHolder get() = cicerone.getNavigatorHolder()
 
     fun routeToMainFragment() = router.newRootScreen( FragmentScreen { MainFragment() })

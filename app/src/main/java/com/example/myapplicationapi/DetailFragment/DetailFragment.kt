@@ -46,6 +46,10 @@ class DetailFragment() : Fragment(R.layout.fragment_detail) {
         }
         viewPager?.adapter = viewPagerAdapter
         with(binding) {
+            viewPager = myViewPager
+            viewModel.imageList.observe(viewLifecycleOwner){
+                viewPagerAdapter?.set(it)
+            }
             sizeItem.text = viewModel.imageList.value?.size.toString()
             tvNameDetail.text = item.name
             tvDescriptionDetail.text = item.description

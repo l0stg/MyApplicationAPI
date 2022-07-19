@@ -30,15 +30,12 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         super.onViewCreated(view, savedInstanceState)
         init()
         setUpViewModel()
+
+        //Закомментировал, завтра сделаю пагинацию лучше
         //var isLoading = false
-
-
-
-
         /*viewModel.integer.observe(viewLifecycleOwner){
             isLoading = false
         }*/
-
 /*        binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){ // вынести логику пагинации во вью модел
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
