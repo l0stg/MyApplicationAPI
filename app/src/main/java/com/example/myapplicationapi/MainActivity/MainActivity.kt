@@ -1,33 +1,28 @@
-package com.example.myapplicationapi
+package com.example.myapplicationapi.MainActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import androidx.activity.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 
-import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
-import com.example.myapplicationapi.MainFragment.MainFragment
-import com.example.myapplicationapi.MainFragment.MyViewModel
+import by.kirich1409.viewbindingdelegate.viewBinding
+
+import com.example.myapplicationapi.R
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.Screens.Screens.navigatorHolder
-import com.example.myapplicationapi.Screens.Screens.router
 
 import com.example.myapplicationapi.databinding.ActivityMainBinding
 import com.github.terrakok.cicerone.androidx.AppNavigator
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private var binding: ActivityMainBinding? = null
+    private val binding: ActivityMainBinding by viewBinding()
+    private val viewModel by viewModels<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding!!.root)
-        Screens.routeToMainFragment()
+        viewModel.routeToMain()
     }
+
     private val navigator = AppNavigator(this, R.id.fragmentContainerView)
 
     override fun onResume() {

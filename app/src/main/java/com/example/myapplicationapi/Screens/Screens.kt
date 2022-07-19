@@ -16,15 +16,9 @@ object Screens {
     val router get() = cicerone.router
     val navigatorHolder get() = cicerone.getNavigatorHolder()
 
-    private fun transToItem(item: DataBaseModel): Bundle {
-        val bundle = Bundle()
-        bundle.putSerializable("Item",item)
-        return (bundle)
-    }
-
     fun routeToMainFragment() = router.newRootScreen( FragmentScreen { MainFragment() })
     fun routeToDetailFragment(item: DataBaseModel) = router.navigateTo(FragmentScreen { DetailFragment.newInstance(item) })
-    fun routeToImageFragment(url: String) = router.navigateTo(FragmentScreen {ImageFragment.newInstance(url)})
+    fun routeToImageFragment(url: String) = router.navigateTo(FragmentScreen { ImageFragment.newInstance(url) })
 
 
 

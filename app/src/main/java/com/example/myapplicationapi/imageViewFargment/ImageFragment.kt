@@ -1,39 +1,23 @@
 package com.example.myapplicationapi.imageViewFargment
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.Build
+import android.content.ContentResolver
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
+import android.provider.MediaStore.Images.Media.insertImage
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.example.data.models.DataBaseModel
-import com.example.myapplicationapi.DetailFragment.DetailFragment
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.FragmentImageBinding
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
-class ImageFragment : Fragment() {
+class ImageFragment : Fragment(R.layout.fragment_image) {
 
-    private var binding: FragmentImageBinding? = null
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentImageBinding.inflate(inflater, container, false)
-        return binding!!.root
-    }
+    private val binding: FragmentImageBinding by viewBinding()
+    private val viewModel: ImageFragmentViewModel by viewModels()
 
     companion object{
         private const val PHOTO = "PHOTO"
@@ -43,32 +27,22 @@ class ImageFragment : Fragment() {
             }
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val urlPhoto = arguments?.getString(PHOTO)//вынести во вью модел
 
-        with(binding!!) {
+        with(binding) {
             Glide.with(imageDetail.context)
                 .load(urlPhoto)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imageDetail)
-        }
+            saveOnDeviceButton.setOnClickListener {
+                val image = imageDetail
+                viewModel.downloadImageFromPath(requireContext().contentResolver, image)
+                Toast.makeText(activity, "Изображение сохранено", Toast.LENGTH_SHORT).show()
+            }
 
-        binding!!.saveOnDeviceButton.setOnClickListener {
-            downloadImageFromPath(urlPhoto!!)
-            Toast.makeText(activity, "Изображение сохранено", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun downloadImageFromPath(name: String) {
-        val image = binding!!.imageDetail
-        val imageBitmap = image.drawable.toBitmap()
-        MediaStore.Images.Media.insertImage(
-            requireContext().contentResolver,
-            imageBitmap,
-            "$name",
-            null)
     }
 }
