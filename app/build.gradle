@@ -44,6 +44,7 @@ android {
 
 dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("com.github.terrakok:cicerone:7.1")
     implementation project (path: ':Data')
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-alpha01")

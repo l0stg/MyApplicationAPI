@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.Glide
 import com.example.data.models.DataBaseModel
+import com.example.myapplicationapi.DetailFragment.DetailFragment
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.FragmentImageBinding
 import java.io.InputStream
@@ -34,20 +35,29 @@ class ImageFragment : Fragment() {
         return binding!!.root
     }
 
+    companion object{
+        private const val PHOTO = "PHOTO"
+        fun newInstance(url: String) = ImageFragment().apply {
+            arguments = Bundle().apply {
+                putString(PHOTO, url)
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imagePut = arguments?.getSerializable("Item") as String //вынести во вью модел
+        val urlPhoto = arguments?.getString(PHOTO)//вынести во вью модел
 
         with(binding!!) {
             Glide.with(imageDetail.context)
-                .load(imagePut)
+                .load(urlPhoto)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imageDetail)
         }
 
         binding!!.saveOnDeviceButton.setOnClickListener {
-            downloadImageFromPath(imagePut)
+            downloadImageFromPath(urlPhoto!!)
             Toast.makeText(activity, "Изображение сохранено", Toast.LENGTH_SHORT).show()
         }
     }

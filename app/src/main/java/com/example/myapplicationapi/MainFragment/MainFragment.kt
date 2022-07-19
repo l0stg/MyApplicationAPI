@@ -13,16 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentMainBinding
+import retrofit2.http.Query
 
 
-
-class MainFragment : Fragment(), SearchView.OnQueryTextListener {
+class MainFragment : Fragment(), SearchView.OnQueryTextListener  {
 
 
     private var binding: FragmentMainBinding? = null
     private val viewModel by viewModels<MyViewModel>()
     private var myAdapter: MyAdapter? = null
-    private val screens: Screens = Screens()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +33,9 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
+        init()
         setUpViewModel()
-        var isLoading = false
+        //var isLoading = false
 
         binding?.buttonSort?.setOnClickListener {
             buttonSortName()
@@ -46,10 +45,10 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
 
 
         viewModel.integer.observe(viewLifecycleOwner){
-            isLoading = false
+            //isLoading = false
         }
 
-        binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){ // вынести логику пагинации во вью модел
+/*        binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){ // вынести логику пагинации во вью модел
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val visibleItemCount = layoutManager.childCount
@@ -65,7 +64,7 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
                 }else Toast.makeText(activity, "Последняя страница", Toast.LENGTH_SHORT).show()
                 super.onScrolled(recyclerView, dx, dy)
             }
-        })
+        })*/
     }
 
     private fun setUpViewModel(){
@@ -74,27 +73,28 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         }
     }
 
-    private fun init(view: View){
+    private fun init(){
        myAdapter = MyAdapter{
-           screens.routeToDetailFragment(it, view)
+           Screens.routeToDetailFragment(it)
        }
         binding?.apply {
             myRecyclerView.layoutManager = LinearLayoutManager(activity)
             myRecyclerView.adapter = myAdapter
         }
     }
-    private fun searchDatabase(query: String){
-        val searchQuery = "%$query%"
+    private fun searchDatabase(searchQuery: String){
         viewModel.searchDatabase(searchQuery).observe(viewLifecycleOwner){
             myAdapter!!.set(it)
         }
     }
     override fun onQueryTextSubmit(p0: String?): Boolean {
         return true
-    }
+}
+
     override fun onQueryTextChange(query: String?): Boolean {
-        if (query != null){
-            searchDatabase(query)
+        if (query != null) {
+            val searchQuery = "%$query%"
+            searchDatabase(searchQuery)
         }
         return true
     }

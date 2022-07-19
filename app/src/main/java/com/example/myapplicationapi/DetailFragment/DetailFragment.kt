@@ -18,8 +18,6 @@ import com.example.myapplicationapi.databinding.FragmentDetailBinding
 class DetailFragment() : Fragment() {
 
     private var binding: FragmentDetailBinding? = null
-    private val screens: Screens = Screens()
-
     private var viewPager: ViewPager2? = null
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private var imageList: ArrayList<String>? = null
@@ -33,11 +31,20 @@ class DetailFragment() : Fragment() {
         return binding!!.root
     }
 
+    companion object{
+        private const val ITEM = "ITEM"
+        fun newInstance(item: DataBaseModel) = DetailFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(ITEM, item)
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val itemOn = arguments?.getSerializable("Item") as DataBaseModel
-        //для примера
+        val itemOn = arguments?.getSerializable(ITEM) as DataBaseModel
+
         imageList = arrayListOf()
         with(imageList!!) {
             add(itemOn.imageAvatar.toString())
@@ -48,17 +55,17 @@ class DetailFragment() : Fragment() {
         }
 
         viewPagerAdapter = ViewPagerAdapter{
-            val bundle = Bundle()
-            bundle.putSerializable("Item",it)
-            findNavController().navigate(R.id.action_detailFragment_to_imageFragment, bundle)
+            Screens.routeToImageFragment(it)
         }
 
         viewPager = binding!!.myViewPager
         viewPagerAdapter!!.set(imageList!!)
+
         viewPager!!.adapter = viewPagerAdapter
         binding!!.sizeItem.text = viewPagerAdapter!!.itemCount.toString()
         binding?.tvNameDetail?.text = itemOn.name
         binding?.tvDescriptionDetail?.text = itemOn.description
+
 
     }
 }
