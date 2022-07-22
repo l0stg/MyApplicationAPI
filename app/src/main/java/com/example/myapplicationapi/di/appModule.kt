@@ -11,14 +11,13 @@ import org.koin.dsl.module
 
 val appModule = module {
     val cicerone = Cicerone.create()
-    val mService = Common()
     single{cicerone.router}
     single{cicerone.getNavigatorHolder()}
-    single{mService}
+    single{Common()}
 
     viewModel{ MainActivityViewModel(get()) }
     viewModel{ DetailViewModel(get()) }
-    viewModel{ MainViewModel(get(), get()) }
+    viewModel{ MainViewModel(get(), get(), get()) }
 
 
 }

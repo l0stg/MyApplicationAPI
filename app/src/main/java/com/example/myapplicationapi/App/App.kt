@@ -2,6 +2,7 @@ package com.example.myapplicationapi.App
 
 import android.app.Application
 import com.example.data.Provider
+import com.example.data.di.dataBaseModule
 import com.example.myapplicationapi.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -16,7 +17,7 @@ class App: Application() {
         startKoin{
             androidLogger()
             androidContext(this@App)
-            modules(appModule)
+            modules(appModule, dataBaseModule)
         }
     }
 }

@@ -9,10 +9,6 @@ import kotlinx.coroutines.flow.Flow
 class SomethingRepository {
     private val myDao = Provider.instance?.somethingDao()
 
-    companion object{
-        val instance = SomethingRepository()
-    }
-
     fun getAllSomethingData(): Flow<List<DataBaseModel>> {
         return myDao!!.getAllSomethingData()
     }
