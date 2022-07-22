@@ -6,25 +6,28 @@ import com.example.data.repositories.SomethingRepository
 import com.example.myapplicationapi.Data.Retrofit.Common
 import com.example.myapplicationapi.Data.Retrofit.RetrofitServices
 import com.example.myapplicationapi.Screens.Screens
+import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 
-class MyViewModel: ViewModel() {
+class MainViewModel(
+    private val router: Router,
+    private val mService: Common
+): ViewModel() {
 
     val integer: MutableLiveData<Int> = MutableLiveData(1)
     private var askSort: Int = 0
-    private var mService: RetrofitServices = Common.retrofitService
+
 
     init {
         getAllItemList(1)
     }
 
     fun routeToDetail(it: DataBaseModel) {
-        Screens.routeToDetailFragment(it)
+        router.navigateTo(Screens.routeToDetailFragment(it))
     }
 
     fun observeAllSomething(): LiveData<List<DataBaseModel>> =
@@ -34,16 +37,9 @@ class MyViewModel: ViewModel() {
          = SomethingRepository.instance.searchDataBase(searchQuery).asLiveData()
 
     private fun getAllItemList(page: Int) {
-        mService.getItemList(page).enqueue(object : Callback<List<DataBaseModel>> {
-            override fun onFailure(call: Call<List<DataBaseModel>>, t: Throwable) {}
-            override fun onResponse(call: Call<List<DataBaseModel>>, response: Response<List<DataBaseModel>>
-                ) {
-                viewModelScope.launch {
-                    SomethingRepository.instance.addAllData(response.body()!!)
-                    integer.postValue(integer.value!! + 1)
-                }
-            }
-        })
+        viewModelScope.launch {
+            mService.getItem(page)?.let { SomethingRepository.instance.addAllData(it) }
+        }
     }
 
     fun observeSortByName(): LiveData<List<DataBaseModel>>{

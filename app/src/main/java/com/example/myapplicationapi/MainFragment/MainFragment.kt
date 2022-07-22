@@ -15,21 +15,21 @@ import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentMainBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.http.Query
 
 
 class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextListener  {
 
-
     private val binding: FragmentMainBinding by viewBinding()
-    private val viewModel by viewModels<MyViewModel>()
+    private val viewModel by viewModel<MainViewModel>()
     private var myAdapter: MyAdapter? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        setUpViewModel()
+        updateDataInUI()
 
         //Закомментировал, завтра сделаю пагинацию лучше
         //var isLoading = false
@@ -55,7 +55,7 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         })*/
     }
 
-    private fun setUpViewModel(){
+    private fun updateDataInUI(){
         viewModel.observeAllSomething().observe(viewLifecycleOwner) {
             myAdapter?.set(it)
         }
@@ -71,7 +71,6 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
                 myRecyclerView.layoutManager = LinearLayoutManager(activity)
                 myRecyclerView.adapter = myAdapter
             }
-
             buttonSort.setOnClickListener {
                 buttonSortName()
             }

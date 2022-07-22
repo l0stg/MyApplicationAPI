@@ -11,22 +11,25 @@ import com.example.myapplicationapi.databinding.ViewPagerItemBinding
 
 class ViewPagerAdapter(private val onItemClicked: (String)-> Unit): RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolder>() {
 
-    private var myList: List<String> = listOf()
+    private val myList: MutableList<String> = mutableListOf()
 
     fun set(newList: List<String>){
-        this.myList = newList.toList()
+        this.myList.clear()
+        this.myList.addAll(newList)
         notifyDataSetChanged()
     }
 
     class ViewPagerViewHolder(view: View):RecyclerView.ViewHolder(view) {
         private val binding = ViewPagerItemBinding.bind(view)
-        fun bind(data: String){
+        fun bind(item: String, onItemClicked: (String) -> Unit){
             with(binding) {
                 Glide.with(imDetailImage.context)
-                .load(data)
+                .load(item)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(imDetailImage)
-
+                root.setOnClickListener{
+                    onItemClicked(item)
+                }
             }
         }
     }
@@ -37,11 +40,8 @@ class ViewPagerAdapter(private val onItemClicked: (String)-> Unit): RecyclerView
     }
 
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
-        val item = myList[position]
-        holder.bind(item)
-        holder.itemView.setOnClickListener {
-            onItemClicked(myList[position])
-        }
+        holder.bind(myList[position], onItemClicked)
+
     }
 
     override fun getItemCount(): Int = myList.size

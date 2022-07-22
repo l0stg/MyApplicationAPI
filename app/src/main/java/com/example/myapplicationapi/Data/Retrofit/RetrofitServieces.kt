@@ -2,13 +2,14 @@ package com.example.myapplicationapi.Data.Retrofit
 
 import com.example.data.models.DataBaseModel
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 
 interface RetrofitServices {
     @GET("beers")
 
-    fun getItemList(
+    suspend fun getItemList(
         @Query("page") page: Int
-    ): Call<List<DataBaseModel>>
+    ): Response<List<DataBaseModel>>
 }

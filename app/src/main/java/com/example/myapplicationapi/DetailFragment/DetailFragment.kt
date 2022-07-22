@@ -13,13 +13,15 @@ import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.AdapterRecyclerView.ViewPagerAdapter
+import com.example.myapplicationapi.MainActivity.MainActivityViewModel
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentDetailBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment() : Fragment(R.layout.fragment_detail) {
 
-    private val viewModel: DetailViewModel by viewModels()
+    private val viewModel by viewModel<DetailViewModel>()
     private val binding: FragmentDetailBinding by viewBinding()
     private var viewPager: ViewPager2? = null
     private var viewPagerAdapter: ViewPagerAdapter? = null

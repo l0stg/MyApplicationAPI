@@ -12,15 +12,7 @@ import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
-    private val cicerone = Cicerone.create()
-    private val router get() = cicerone.router
-    val navigatorHolder get() = cicerone.getNavigatorHolder()
-
-    fun routeToMainFragment() = router.newRootScreen( FragmentScreen { MainFragment() })
-    fun routeToDetailFragment(item: DataBaseModel) = router.navigateTo(FragmentScreen { DetailFragment.newInstance(item) })
-    fun routeToImageFragment(url: String) = router.navigateTo(FragmentScreen { ImageFragment.newInstance(url) })
-
-
-
-
+    fun routeToMainFragment() = FragmentScreen { MainFragment() }
+    fun routeToDetailFragment(item: DataBaseModel) = FragmentScreen { DetailFragment.newInstance(item) }
+    fun routeToImageFragment(url: String) = FragmentScreen { ImageFragment.newInstance(url) }
 }

@@ -11,24 +11,30 @@ import com.example.myapplicationapi.databinding.ItemViewBinding
 
 class MyAdapter(private val onItemClicked: (DataBaseModel)-> Unit):RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-     private var myList: List<DataBaseModel> = listOf()
+    //приватный и неизменяемый, для большего контроля деействий в адаптере
+    private val myList: MutableList<DataBaseModel> = mutableListOf()
 
+    //Сначала очищаем а потом сетим новый список
     fun set(newList: List<DataBaseModel>){
-        this.myList = newList.toList()
+        this.myList.clear()
+        this.myList.addAll(newList)
         notifyDataSetChanged()
     }
-
+    //все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
         private val binding = ItemViewBinding.bind(view)
-        fun bind(data: DataBaseModel)
+        fun bind(item: DataBaseModel, onItemClicked: (DataBaseModel) -> Unit)
          = with(binding) {
-            tvNameMain.text = data.name
-            tvDescription.text = data.description
+            tvNameMain.text = item.name
+            tvDescription.text = item.description
             Glide.with(ivPerson.context)
-                .load(data.imageAvatar)
+                .load(item.imageAvatar)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(ivPerson)
-        }
+            root.setOnClickListener{
+                onItemClicked(item)
+            }
+         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -37,11 +43,7 @@ class MyAdapter(private val onItemClicked: (DataBaseModel)-> Unit):RecyclerView.
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = myList[position]
-        holder.bind(item)
-        holder.itemView.setOnClickListener {
-            onItemClicked(myList[position])
-        }
+        holder.bind(myList[position], onItemClicked)
     }
 
     override fun getItemCount(): Int {

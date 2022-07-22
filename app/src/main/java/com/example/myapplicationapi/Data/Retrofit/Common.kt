@@ -1,7 +1,8 @@
 package com.example.myapplicationapi.Data.Retrofit
+import com.example.data.models.DataBaseModel
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-object Common {
-    private val BASE_URL = "https://api.punkapi.com/v2/"
-    val retrofitService: RetrofitServices
-        get() = RetrofitClient.getClient(BASE_URL).create(RetrofitServices::class.java)
+class Common {
+    suspend fun getItem(page: Int): List<DataBaseModel>? = RetrofitClient.api.getItemList(page).body()
 }
