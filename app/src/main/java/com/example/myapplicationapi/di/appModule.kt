@@ -1,7 +1,7 @@
 package com.example.myapplicationapi.di
 
-import com.example.myapplicationapi.Data.Retrofit.Common
-import com.example.myapplicationapi.Data.Retrofit.RetrofitServices
+
+import com.example.myapplicationapi.Data.Retrofit.Repository
 import com.example.myapplicationapi.DetailFragment.DetailViewModel
 import com.example.myapplicationapi.MainActivity.MainActivityViewModel
 import com.example.myapplicationapi.MainFragment.MainViewModel
@@ -13,7 +13,7 @@ val appModule = module {
     val cicerone = Cicerone.create()
     single{cicerone.router}
     single{cicerone.getNavigatorHolder()}
-    single{Common()}
+    single{Repository()}
 
     viewModel{ MainActivityViewModel(get()) }
     viewModel{ DetailViewModel(get()) }

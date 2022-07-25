@@ -30,29 +30,6 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         super.onViewCreated(view, savedInstanceState)
         init()
         updateDataInUI()
-
-        //Закомментировал, завтра сделаю пагинацию лучше
-        //var isLoading = false
-        /*viewModel.integer.observe(viewLifecycleOwner){
-            isLoading = false
-        }*/
-/*        binding!!.myRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){ // вынести логику пагинации во вью модел
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val visibleItemCount = layoutManager.childCount
-                val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
-                val total = myAdapter!!.itemCount
-                if (viewModel.integer.value!! < 10) {
-                    if (!isLoading) {
-                        if ((visibleItemCount + pastVisibleItem) >= total) {
-                            isLoading = true
-                            viewModel.getAllItemList(viewModel.integer.value!!)
-                        }
-                    }
-                }else Toast.makeText(activity, "Последняя страница", Toast.LENGTH_SHORT).show()
-                super.onScrolled(recyclerView, dx, dy)
-            }
-        })*/
     }
 
     private fun updateDataInUI(){
