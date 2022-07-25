@@ -4,6 +4,8 @@ import androidx.lifecycle.*
 import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.Data.Retrofit.Repository
 import com.example.myapplicationapi.Screens.Screens
+import com.example.myapplicationapi.sortDesc
+import com.example.myapplicationapi.sortName
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -11,8 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-private const val sortName = 0
-private const val sortDesc = 1
+
 
 class MainViewModel(
     private val router: Router,
