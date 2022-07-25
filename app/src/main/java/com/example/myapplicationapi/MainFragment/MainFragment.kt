@@ -53,10 +53,8 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
        }
 
         with(binding) {
-            apply {
-                myRecyclerView.layoutManager = LinearLayoutManager(activity)
-                myRecyclerView.adapter = myAdapter
-            }
+            myRecyclerView.layoutManager = LinearLayoutManager(activity)
+            myRecyclerView.adapter = myAdapter
             buttonSort.setOnClickListener {
                 buttonSortName()
             }

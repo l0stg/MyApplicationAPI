@@ -16,7 +16,7 @@ class MainViewModel(
     private val myRepository: Repository,
 ): ViewModel() {
 
-    private val _list =  MutableStateFlow<List<DataBaseModel>>(emptyList())
+    private val _list = MutableStateFlow<List<DataBaseModel>>(emptyList())
     val list: Flow<List<DataBaseModel>> = _list
     private var askSort: Int = 0
 
@@ -53,7 +53,7 @@ class MainViewModel(
     }
 
     fun observeSortByName(){
-        askSort = if (askSort == 0) //это криво давай нормально сделаем
+        askSort = if (askSort == 0)
             1
         else 0
         viewModelScope.launch {

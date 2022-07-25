@@ -30,7 +30,7 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val urlPhoto = arguments?.getString(PHOTO)//вынести во вью модел
+        val urlPhoto = arguments?.getString(PHOTO)
 
         with(binding) {
             Glide.with(imageDetail.context)

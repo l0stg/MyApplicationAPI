@@ -46,5 +46,4 @@ class ViewPagerAdapter(private val onItemClicked: (String)-> Unit): RecyclerView
 
     override fun getItemCount(): Int = myList.size
 
-
 }

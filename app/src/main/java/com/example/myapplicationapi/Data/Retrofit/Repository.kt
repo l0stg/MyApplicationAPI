@@ -1,6 +1,5 @@
 package com.example.myapplicationapi.Data.Retrofit
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
+
 import com.example.data.models.DataBaseModel
 import com.example.data.repositories.SomethingRepository
 import kotlinx.coroutines.flow.Flow
@@ -8,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
 class Repository(
     private val myDataBase: SomethingRepository
 ){
-
     suspend fun getItem(page: Int) {
         val itemsList: List<DataBaseModel>?
         itemsList = RetrofitClient.api.getItemList(page).body() ?: listOf()
