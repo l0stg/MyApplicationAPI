@@ -33,7 +33,8 @@ class MainViewModel(
 
     private fun getAllItemList(page: Int) {
         viewModelScope.launch {
-            mService.getItem(page)
+            if (page <= 10)
+                mService.getItem(page)
         }
     }
 
