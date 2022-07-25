@@ -30,6 +30,7 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         super.onViewCreated(view, savedInstanceState)
         init()
         updateDataInUI()
+
     }
 
     private fun updateDataInUI(){

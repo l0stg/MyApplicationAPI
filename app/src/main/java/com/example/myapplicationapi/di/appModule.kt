@@ -10,14 +10,15 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+
     val cicerone = Cicerone.create()
     single{cicerone.router}
     single{cicerone.getNavigatorHolder()}
-    single{Repository()}
+    single{Repository(get())}
 
     viewModel{ MainActivityViewModel(get()) }
     viewModel{ DetailViewModel(get()) }
-    viewModel{ MainViewModel(get(), get(), get()) }
+    viewModel{ MainViewModel(get(), get()) }
 
 
 }

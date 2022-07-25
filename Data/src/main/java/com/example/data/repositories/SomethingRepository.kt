@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 class SomethingRepository {
+
     private val myDao = Provider.instance?.somethingDao()
 
     fun getAllSomethingData(): Flow<List<DataBaseModel>> {
