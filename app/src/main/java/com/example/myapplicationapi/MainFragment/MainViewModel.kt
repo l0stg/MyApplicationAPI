@@ -5,6 +5,7 @@ import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.Data.Retrofit.Repository
 import com.example.myapplicationapi.Screens.Screens
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -19,18 +20,29 @@ class MainViewModel(
 
     init {
         getAllItemList(1)
+        observeAllSomething()
     }
 
     fun routeToDetail(it: DataBaseModel) {
         router.navigateTo(Screens.routeToDetailFragment(it))
     }
 
-    fun observeAllSomething(): LiveData<List<DataBaseModel>> =
-        myRepository.updateData()
 
-    fun searchDatabase(searchQuery: String): LiveData<List<DataBaseModel>> =
-        myRepository.searchDataBase(searchQuery)
+    private fun observeAllSomething(){
+        viewModelScope.launch {
+            myRepository.getAllSomethingData().collect{
+                _list.postValue(it)
+            }
+        }
+    }
 
+    fun searchDatabase(searchQuery: String) {
+        viewModelScope.launch {
+            myRepository.searchDataBase(searchQuery).collect{
+                _list.postValue(it)
+            }
+        }
+    }
 
     private fun getAllItemList(page: Int) {
         viewModelScope.launch {
@@ -39,10 +51,14 @@ class MainViewModel(
         }
     }
 
-    fun observeSortByName(): LiveData<List<DataBaseModel>>{
+    fun observeSortByName(){
         askSort = if (askSort == 0) //это криво давай нормально сделаем
             1
         else 0
-        return myRepository.sortByName(askSort)
+        viewModelScope.launch {
+            myRepository.sortByName(askSort).collect {
+                _list.postValue(it)
+            }
+        }
     }
 }

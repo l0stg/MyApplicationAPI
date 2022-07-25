@@ -34,7 +34,7 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
     }
 
     private fun updateDataInUI(){
-        viewModel.observeAllSomething().observe(viewLifecycleOwner) {
+        viewModel.list.observe(viewLifecycleOwner) {
             myAdapter?.set(it)
         }
     }
@@ -57,9 +57,7 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
     }
 
     private fun searchDatabase(searchQuery: String){
-        viewModel.searchDatabase(searchQuery).observe(viewLifecycleOwner){
-            myAdapter!!.set(it)
-        }
+        viewModel.searchDatabase(searchQuery)
     }
 
     override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -75,8 +73,6 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
     }
 
     private fun buttonSortName(){
-        viewModel.observeSortByName().observe(viewLifecycleOwner){
-            myAdapter?.set(it)
-        }
+        viewModel.observeSortByName()
     }
 }

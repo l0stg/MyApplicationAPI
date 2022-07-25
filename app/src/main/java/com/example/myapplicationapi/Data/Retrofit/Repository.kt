@@ -3,6 +3,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.example.data.models.DataBaseModel
 import com.example.data.repositories.SomethingRepository
+import kotlinx.coroutines.flow.Flow
 
 class Repository(
     private val myDataBase: SomethingRepository
@@ -14,12 +15,12 @@ class Repository(
         myDataBase.addAllData(itemsList)
     }
 
-    fun searchDataBase(searchQuery: String): LiveData<List<DataBaseModel>> =
-        myDataBase.searchDataBase(searchQuery).asLiveData()
+    fun searchDataBase(searchQuery: String): Flow<List<DataBaseModel>> =
+        myDataBase.searchDataBase(searchQuery)
 
-    fun updateData(): LiveData<List<DataBaseModel>> = myDataBase.getAllSomethingData().asLiveData()
+    fun getAllSomethingData(): Flow<List<DataBaseModel>> = myDataBase.getAllSomethingData()
 
-    fun sortByName(askSort: Int): LiveData<List<DataBaseModel>> =
-        myDataBase.sortByName(askSort).asLiveData()
+    fun sortByName(askSort: Int): Flow<List<DataBaseModel>> =
+        myDataBase.sortByName(askSort)
 
 }
