@@ -33,7 +33,7 @@ class MainViewModel(
 
     private fun getAllItemList(page: Int) {
         viewModelScope.launch {
-            mService.getItem(page)?.let { somRep.addAllData(it) }
+            mService.getItem(page)
         }
     }
 
