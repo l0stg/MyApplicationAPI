@@ -1,6 +1,5 @@
 package com.example.data.Daos
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Dao
 import com.example.data.models.DataBaseModel

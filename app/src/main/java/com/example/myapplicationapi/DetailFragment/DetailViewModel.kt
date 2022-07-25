@@ -26,6 +26,7 @@ class DetailViewModel(
             repeat(5){
                 list.add(item.imageAvatar.toString())
             }
+            list.add("")//проверка на работающую заглушку
             _imageList.value = list
         }
     }
