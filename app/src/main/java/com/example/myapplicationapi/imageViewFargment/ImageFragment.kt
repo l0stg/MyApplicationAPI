@@ -42,7 +42,6 @@ class ImageFragment : Fragment(R.layout.fragment_image) {
                 viewModel.downloadImageFromPath(requireContext().contentResolver, image)
                 Toast.makeText(activity, "Изображение сохранено", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 }

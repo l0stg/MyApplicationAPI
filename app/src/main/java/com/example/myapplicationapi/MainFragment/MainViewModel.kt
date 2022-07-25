@@ -5,11 +5,14 @@ import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.Data.Retrofit.Repository
 import com.example.myapplicationapi.Screens.Screens
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+private const val sortName = 0
+private const val sortDesc = 1
 
 class MainViewModel(
     private val router: Router,
@@ -19,9 +22,11 @@ class MainViewModel(
     private val _list = MutableStateFlow<List<DataBaseModel>>(emptyList())
     val list: Flow<List<DataBaseModel>> = _list
     private var askSort: Int = 0
+    private var page = 0
+    private var job: Job? = null
 
     init {
-        getAllItemList(1)
+        getAllItemList(page)
         observeAllSomething()
     }
 
@@ -30,7 +35,8 @@ class MainViewModel(
     }
 
     private fun observeAllSomething(){
-        viewModelScope.launch {
+        stopCorutines()
+        job = viewModelScope.launch {
             myRepository.getAllSomethingData().collect{
                 _list.value = it
             }
@@ -38,7 +44,8 @@ class MainViewModel(
     }
 
     fun searchDatabase(searchQuery: String) {
-        viewModelScope.launch {
+        stopCorutines()
+        job = viewModelScope.launch {
             myRepository.searchDataBase(searchQuery).collect{
                 _list.value = it
             }
@@ -46,20 +53,27 @@ class MainViewModel(
     }
 
     private fun getAllItemList(page: Int) {
-        viewModelScope.launch {
+        stopCorutines()
+        job = viewModelScope.launch {
             if (page <= 10) //это для пагинации, которой пока нет
                 myRepository.getItem(page)
         }
     }
 
     fun observeSortByName(){
-        askSort = if (askSort == 0)
-            1
-        else 0
-        viewModelScope.launch {
+        stopCorutines()
+        if (askSort == sortName)
+            askSort = sortDesc
+        else askSort = sortName
+        job = viewModelScope.launch {
             myRepository.sortByName(askSort).collect {
                 _list.value = it
             }
         }
+    }
+
+    private fun stopCorutines(){
+        job?.cancel()
+        job = null
     }
 }

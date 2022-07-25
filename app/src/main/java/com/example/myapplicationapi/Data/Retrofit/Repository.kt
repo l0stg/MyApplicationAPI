@@ -1,24 +1,25 @@
 package com.example.myapplicationapi.Data.Retrofit
 
+import com.example.data.Daos.Dao
 import com.example.data.models.DataBaseModel
-import com.example.data.repositories.SomethingRepository
 import kotlinx.coroutines.flow.Flow
 
 class Repository(
-    private val myDataBase: SomethingRepository
+    private val api: RetrofitServices,
+    private val myDao: Dao
 ){
     suspend fun getItem(page: Int) {
         val itemsList: List<DataBaseModel>?
-        itemsList = RetrofitClient.api.getItemList(page).body() ?: listOf()
-        myDataBase.addAllData(itemsList)
+        itemsList = api.getItemList(page).body() ?: listOf()
+        myDao.addAllData(itemsList)
     }
 
     fun searchDataBase(searchQuery: String): Flow<List<DataBaseModel>> =
-        myDataBase.searchDataBase(searchQuery)
+        myDao.searchDataBase(searchQuery)
 
-    fun getAllSomethingData(): Flow<List<DataBaseModel>> = myDataBase.getAllSomethingData()
+    fun getAllSomethingData(): Flow<List<DataBaseModel>> = myDao.getAllSomethingData()
 
     fun sortByName(askSort: Int): Flow<List<DataBaseModel>> =
-        myDataBase.sortByName(askSort)
+        myDao.sortByName(askSort)
 
 }

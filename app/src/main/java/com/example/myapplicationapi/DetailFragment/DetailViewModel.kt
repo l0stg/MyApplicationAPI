@@ -23,7 +23,7 @@ class DetailViewModel(
     fun addToList(item: DataBaseModel) {
         viewModelScope.launch {
             val list: MutableList<String> = mutableListOf()
-            repeat((1..5).count()) {
+            repeat(5){
                 list.add(item.imageAvatar.toString())
             }
             _imageList.value = list

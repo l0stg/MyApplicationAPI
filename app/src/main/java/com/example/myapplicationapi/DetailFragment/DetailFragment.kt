@@ -2,26 +2,15 @@ package com.example.myapplicationapi.DetailFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.AdapterRecyclerView.ViewPagerAdapter
-import com.example.myapplicationapi.MainActivity.MainActivityViewModel
 import com.example.myapplicationapi.R
-import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentDetailBinding
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

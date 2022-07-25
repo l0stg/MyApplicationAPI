@@ -47,11 +47,11 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         }
     }
 
+
     private fun init(){
        myAdapter = MyAdapter{
            viewModel.routeToDetail(it)
        }
-
         with(binding) {
             myRecyclerView.layoutManager = LinearLayoutManager(activity)
             myRecyclerView.adapter = myAdapter
