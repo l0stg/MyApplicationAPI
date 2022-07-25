@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,6 +18,7 @@ import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentMainBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.http.Query
 
@@ -30,12 +34,13 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         super.onViewCreated(view, savedInstanceState)
         init()
         updateDataInUI()
-
     }
 
-    private fun updateDataInUI(){
-        viewModel.list.observe(viewLifecycleOwner) {
-            myAdapter?.set(it)
+    private fun updateDataInUI() {
+        lifecycleScope.launch {
+                viewModel.list.collect {
+                    myAdapter?.set(it)
+                }
         }
     }
 
