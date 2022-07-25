@@ -1,5 +1,6 @@
 package com.example.myapplicationapi.MainFragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,10 +38,12 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
     }
 
     private fun updateDataInUI() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.list.collect {
                     myAdapter?.set(it)
                 }
+            }
         }
     }
 
