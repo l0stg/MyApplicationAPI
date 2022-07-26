@@ -1,4 +1,4 @@
-package com.example.myapplicationapi.router
+package com.example.myapplicationapi.ui.router
 
 import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.ui.DetailFragment.DetailFragment

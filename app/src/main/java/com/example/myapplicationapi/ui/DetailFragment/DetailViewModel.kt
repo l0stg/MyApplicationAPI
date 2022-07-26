@@ -3,7 +3,7 @@ package com.example.myapplicationapi.ui.DetailFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.models.DataBaseModel
-import com.example.myapplicationapi.router.Screens
+import com.example.myapplicationapi.ui.router.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

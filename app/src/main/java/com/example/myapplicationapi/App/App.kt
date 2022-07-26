@@ -14,7 +14,7 @@ class App: Application() {
         super.onCreate()
         Provider.create(this)
 
-        // Создание коина и обновление модулей
+        // Создание коина и обьявление модулей
         startKoin{
             androidLogger()
             androidContext(this@App)

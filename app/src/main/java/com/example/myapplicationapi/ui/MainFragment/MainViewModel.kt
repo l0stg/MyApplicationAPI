@@ -3,7 +3,7 @@ package com.example.myapplicationapi.ui.MainFragment
 import androidx.lifecycle.*
 import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.data.Repository
-import com.example.myapplicationapi.router.Screens
+import com.example.myapplicationapi.ui.router.Screens
 import com.example.myapplicationapi.sortDesc
 import com.example.myapplicationapi.sortName
 import com.github.terrakok.cicerone.Router
