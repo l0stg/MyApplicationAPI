@@ -22,7 +22,7 @@ class MainViewModel(
     private val _list = MutableStateFlow<List<DataBaseModel>>(emptyList())
     val list: Flow<List<DataBaseModel>> = _list
     private var askSort: Int = 0
-    private var page = 0
+    private var page = 1
     private var job: Job? = null
 
     init {
@@ -38,7 +38,6 @@ class MainViewModel(
     }
     // Наблюдатель за изменением базы данных
     private fun observeAllSomething(){
-        stopCorutines()
         job = viewModelScope.launch {
             myRepository.getAllSomethingData().collect{
                 _list.value = it
@@ -58,10 +57,8 @@ class MainViewModel(
 
     // Загрузка элементов по средству ретрофита
     private fun getAllItemList(page: Int) {
-        stopCorutines()
         job = viewModelScope.launch {
-            if (page <= 10) //это для пагинации, которой пока нет
-                myRepository.getItem(page)
+            myRepository.getItem(page)
         }
     }
 

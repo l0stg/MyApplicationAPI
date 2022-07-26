@@ -12,14 +12,12 @@ import com.example.data.models.DataBaseModel
 @Database(entities = [DataBaseModel::class], version = 1)
 abstract class Provider: RoomDatabase() {
 
-   /*companion object {
+   companion object {
         var instance: Provider? = null
         fun create(context: Context) {
-            if (instance == null)
-                instance = Room.databaseBuilder(context, Provider::class.java, "my_table").build()
-            else instance
+            instance = Room.databaseBuilder(context, Provider::class.java, "my_table").build()
         }
-    }*/
+    }
 
     abstract fun somethingDao(): Dao
 }

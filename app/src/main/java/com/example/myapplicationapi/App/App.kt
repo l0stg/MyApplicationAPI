@@ -12,7 +12,7 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        //Provider.create(this)
+        Provider.create(this)
 
         // Создание коина и обновление модулей
         startKoin{

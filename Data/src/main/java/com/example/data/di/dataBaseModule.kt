@@ -6,9 +6,7 @@ import org.koin.dsl.module
 
 val dataBaseModule = module {
 
-
-    single { Room.databaseBuilder(get(), Provider::class.java, "my_table").build() }
-    single { get<Provider>().somethingDao() }
     // Сингл Дао
-    //single { Provider.instance?.somethingDao() }
+    single { Provider.instance?.somethingDao() }
+    single { Provider.instance }
 }
