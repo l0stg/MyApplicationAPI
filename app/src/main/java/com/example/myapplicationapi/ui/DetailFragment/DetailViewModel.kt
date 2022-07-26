@@ -1,11 +1,9 @@
-package com.example.myapplicationapi.DetailFragment
+package com.example.myapplicationapi.ui.DetailFragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.models.DataBaseModel
-import com.example.myapplicationapi.Screens.Screens
+import com.example.myapplicationapi.router.Screens
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +16,10 @@ class DetailViewModel(
     private val _imageList =  MutableStateFlow<List<String>>(emptyList()) //заменить на флоу
     val imageList: Flow<List<String>> = _imageList
 
+    // Навигация на фрагмент просмотра изображения
     fun routeToImageFragment(url: String) = router.navigateTo(Screens.routeToImageFragment(url))
 
+    // Создание массива с изображения
     fun addToList(item: DataBaseModel) {
         viewModelScope.launch {
             val list: MutableList<String> = mutableListOf()

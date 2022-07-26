@@ -1,11 +1,10 @@
-package com.example.myapplicationapi.AdapterRecyclerView
+package com.example.myapplicationapi.ui.DetailFragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.ViewPagerItemBinding
 
@@ -13,12 +12,13 @@ class ViewPagerAdapter(private val onItemClicked: (String)-> Unit): RecyclerView
 
     private val myList: MutableList<String> = mutableListOf()
 
+    //Сеттер для новых данных
     fun set(newList: List<String>){
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
     }
-
+    // ВьюХолдер
     class ViewPagerViewHolder(view: View):RecyclerView.ViewHolder(view) {
         private val binding = ViewPagerItemBinding.bind(view)
         fun bind(item: String, onItemClicked: (String) -> Unit){

@@ -1,27 +1,18 @@
-package com.example.myapplicationapi.MainFragment
+package com.example.myapplicationapi.ui.MainFragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.myapplicationapi.AdapterRecyclerView.MyAdapter
 import com.example.myapplicationapi.R
-import com.example.myapplicationapi.Screens.Screens
 import com.example.myapplicationapi.databinding.FragmentMainBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import retrofit2.http.Query
 
 
 class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextListener  {
@@ -37,6 +28,7 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         updateDataInUI()
     }
 
+    // Обновление данных в адаптере по средства Flow
     private fun updateDataInUI() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -47,21 +39,25 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
         }
     }
 
-
+    // Иницилизация
     private fun init(){
        myAdapter = MyAdapter{
+           // Открытие фрагмента при нажатии на Item
            viewModel.routeToDetail(it)
        }
         with(binding) {
             myRecyclerView.layoutManager = LinearLayoutManager(activity)
             myRecyclerView.adapter = myAdapter
             buttonSort.setOnClickListener {
-                buttonSortName()
+                //Сортировка при нажатии на кнопку
+                viewModel.buttonSortNameOrDesc()
             }
+            // Обьявление searchView
             searchViewMain.setOnQueryTextListener(this@MainFragment)
         }
     }
 
+    // Функция для поиска по БД по средством searchView
     private fun searchDatabase(searchQuery: String){
         viewModel.searchDatabase(searchQuery)
     }
@@ -76,9 +72,5 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
             searchDatabase(searchQuery)
         }
         return true
-    }
-
-    private fun buttonSortName(){
-        viewModel.observeSortByName()
     }
 }

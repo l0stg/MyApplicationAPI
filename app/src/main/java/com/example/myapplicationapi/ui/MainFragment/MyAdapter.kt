@@ -1,4 +1,4 @@
-package com.example.myapplicationapi.AdapterRecyclerView
+package com.example.myapplicationapi.ui.MainFragment
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,18 +9,19 @@ import com.example.data.models.DataBaseModel
 import com.example.myapplicationapi.R
 import com.example.myapplicationapi.databinding.ItemViewBinding
 
+// Адаптер для главного экрана
 class MyAdapter(private val onItemClicked: (DataBaseModel)-> Unit):RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-    //приватный и неизменяемый, для большего контроля деействий в адаптере
+    // Приватный и неизменяемый, для большего контроля деействий в адаптере
     private val myList: MutableList<DataBaseModel> = mutableListOf()
 
-    //Сначала очищаем а потом сетим новый список
+    // Сначала очищаем а потом сетим новый список
     fun set(newList: List<DataBaseModel>){
         this.myList.clear()
         this.myList.addAll(newList)
         notifyDataSetChanged()
     }
-    //все действия происходят в ViewHolder, чтобы он был самостоятельный
+    // Все действия происходят в ViewHolder, чтобы он был самостоятельный
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
         private val binding = ItemViewBinding.bind(view)
         fun bind(item: DataBaseModel, onItemClicked: (DataBaseModel) -> Unit)
