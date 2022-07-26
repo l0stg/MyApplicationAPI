@@ -2,10 +2,10 @@ package com.example.myapplicationapi.ui.MainFragment
 
 import androidx.lifecycle.*
 import com.example.data.models.DataBaseModel
+import com.example.myapplicationapi.DBConstants.sortDesc
+import com.example.myapplicationapi.DBConstants.sortName
 import com.example.myapplicationapi.data.Repository
 import com.example.myapplicationapi.ui.router.Screens
-import com.example.myapplicationapi.sortDesc
-import com.example.myapplicationapi.sortName
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +21,7 @@ class MainViewModel(
     // Лист для обновления данных
     private val _list = MutableStateFlow<List<DataBaseModel>>(emptyList())
     val list: Flow<List<DataBaseModel>> = _list
-    private var askSort: Int = 0
+    private var askSort: Int = sortName
     private var page = 1
     private var job: Job? = null
 
@@ -38,7 +38,7 @@ class MainViewModel(
     }
     // Наблюдатель за изменением базы данных
     private fun observeAllSomething(){
-        job = viewModelScope.launch {
+        viewModelScope.launch {
             myRepository.getAllSomethingData().collect{
                 _list.value = it
             }
@@ -57,7 +57,7 @@ class MainViewModel(
 
     // Загрузка элементов по средству ретрофита
     private fun getAllItemList(page: Int) {
-        job = viewModelScope.launch {
+        viewModelScope.launch {
             myRepository.getItem(page)
         }
     }

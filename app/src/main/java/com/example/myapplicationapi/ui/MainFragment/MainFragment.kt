@@ -68,8 +68,7 @@ class MainFragment : Fragment(R.layout.fragment_main), SearchView.OnQueryTextLis
 
     override fun onQueryTextChange(query: String?): Boolean {
         if (query != null) {
-            val searchQuery = "%$query%"
-            searchDatabase(searchQuery)
+            searchDatabase(query)
         }
         return true
     }

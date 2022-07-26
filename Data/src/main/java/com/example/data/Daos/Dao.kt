@@ -24,6 +24,6 @@ interface Dao {
     suspend fun addAllData(newData: List<DataBaseModel>)
 
     // Получение элементов в соответствии с запросом
-    @Query("SELECT * FROM my_table WHERE title LIKE :searchQuery")
+    @Query("SELECT * FROM my_table WHERE title LIKE '%' || :searchQuery  || '%'")
     fun searchDataBase(searchQuery: String): Flow<List<DataBaseModel>>
 }
