@@ -8,16 +8,14 @@ import androidx.room.RoomDatabase
 import com.example.data.Daos.Dao
 import com.example.data.models.DataBaseModel
 
-
+// Создание базы данных
 @Database(entities = [DataBaseModel::class], version = 1)
 abstract class Provider: RoomDatabase() {
 
-    companion object {
+   companion object {
         var instance: Provider? = null
         fun create(context: Context) {
-            if (instance == null)
-                instance = Room.databaseBuilder(context, Provider::class.java, "my_table").build()
-            else instance
+            instance = Room.databaseBuilder(context, Provider::class.java, "my_table").build()
         }
     }
 
